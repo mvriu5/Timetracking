@@ -6,6 +6,7 @@ import de.noque.timetracking.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +23,16 @@ public class TaskServiceImpl implements TaskService {
             throw new RuntimeException("No task with the id '" + id + "' found.");
 
         return task.get();
+    }
+
+    @Override
+    public List<Task> getAll() {
+        return taskRepository.findAll();
+    }
+
+    @Override
+    public List<Task> getAllFromEmployee(Long employeeId) {
+        return taskRepository.findByEmployeeId(employeeId);
     }
 
     @Override

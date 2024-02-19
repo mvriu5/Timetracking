@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping(path = "/tasks")
 @RestController
 public class TaskController {
@@ -20,6 +22,18 @@ public class TaskController {
     public ResponseEntity<Task> getTask(@PathVariable("id") Long id) {
         Task task = taskService.get(id);
         return new ResponseEntity<>(task, HttpStatus.OK);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<Task>> getAllTasks() {
+        List<Task> tasks = taskService.getAll();
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
+
+    @GetMapping("/{employeeId}")
+    public ResponseEntity<List<Task>> getAllTasksFromEmployee(@PathVariable Long employeeId) {
+        List<Task> tasks = taskService.getAllFromEmployee(employeeId);
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     @PostMapping("")
