@@ -6,6 +6,7 @@ import de.noque.timetracking.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +23,11 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new RuntimeException("No employee with the id '" + id + "' found.");
 
         return employee.get();
+    }
+
+    @Override
+    public List<Employee> getAll() {
+        return employeeRepository.findAll();
     }
 
     @Override
