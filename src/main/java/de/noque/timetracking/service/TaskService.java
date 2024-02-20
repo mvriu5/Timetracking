@@ -17,4 +17,6 @@ public interface TaskService {
 
     void delete(Long id);
 
+    void deleteAllFromEmployee(Long employeeId);
+
 }

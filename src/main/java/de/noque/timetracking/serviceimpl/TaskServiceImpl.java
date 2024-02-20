@@ -64,4 +64,9 @@ public class TaskServiceImpl implements TaskService {
 
         taskRepository.deleteById(id);
     }
+
+    @Override
+    public void deleteAllFromEmployee(Long employeeId) {
+       taskRepository.deleteByEmployeeId(employeeId);
+    }
 }
