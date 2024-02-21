@@ -11,19 +11,22 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @Column(nullable = false)
     private String Name;
 
+    @Column(nullable = false, unique = true)
     private String Email;
 
+    @Column(nullable = false)
     private String Password;
 
+    @Column(nullable = false)
     private String Role;
 
+    @Column(nullable = false)
     private LocalDateTime TimeCreated;
 
-    public Employee() {
-
-    }
+    public Employee() {}
 
     public Employee(String name, String email, String password, String role) {
         this.Name = name;
