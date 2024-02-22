@@ -1,6 +1,8 @@
 package de.noque.timetracking.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,6 +26,7 @@ public class Employee {
     private String Role;
 
     @Column(nullable = false)
+    @CreationTimestamp
     private LocalDateTime TimeCreated;
 
     public Employee() {}
@@ -33,7 +36,7 @@ public class Employee {
         this.Email = email;
         this.Password = password;
         this.Role = role;
-        this.TimeCreated = LocalDateTime.now();
+        TimeCreated = LocalDateTime.now();
     }
 
     //<editor-fold desc="Getter & Setter">

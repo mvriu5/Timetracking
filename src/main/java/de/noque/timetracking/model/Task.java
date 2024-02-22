@@ -1,6 +1,8 @@
 package de.noque.timetracking.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,14 +13,20 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @Column(nullable = false)
     private Long EmployeeId;
 
+    @Column(nullable = false)
     private String Task;
 
+    @Column(nullable = false)
     private LocalDateTime TimeFrom;
 
+    @Column(nullable = false)
     private LocalDateTime TimeTo;
 
+    @Column(nullable = false)
+    @CreationTimestamp
     private LocalDateTime TimeCreated;
 
     public Task() {}

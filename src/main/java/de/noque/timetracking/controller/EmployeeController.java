@@ -28,7 +28,7 @@ public class EmployeeController {
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping("/create")
     public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
         Employee employeeDb = employeeService.create(employee);
         return new ResponseEntity<>(employeeDb, HttpStatus.OK);
@@ -40,7 +40,7 @@ public class EmployeeController {
         return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
         employeeService.delete(id);
         return new ResponseEntity<>("Employee with the id '" + id + "' deleted successfully.", HttpStatus.OK);

@@ -1,5 +1,6 @@
 package de.noque.timetracking.serviceimpl;
 
+import de.noque.timetracking.exception.TaskNotFoundException;
 import de.noque.timetracking.model.Task;
 import de.noque.timetracking.repository.TaskRepository;
 import de.noque.timetracking.service.TaskService;
@@ -19,8 +20,7 @@ public class TaskServiceImpl implements TaskService {
     public Task get(Long id) {
         Optional<Task> task = taskRepository.findById(id);
 
-        if (task.isEmpty())
-            throw new RuntimeException("No task with the id '" + id + "' found.");
+        if (task.isEmpty()) throw new TaskNotFoundException(id);
 
         return task.get();
     }
@@ -44,8 +44,7 @@ public class TaskServiceImpl implements TaskService {
     public Task update(Long id, Task task) {
         Optional<Task> taskDb = taskRepository.findById(id);
 
-        if (taskDb.isEmpty())
-            throw new RuntimeException("No task with the id '" + id + "' found.");
+        if (taskDb.isEmpty()) throw new TaskNotFoundException(id);
 
         taskDb.get().setTask(task.getTask());
         taskDb.get().setTimeCreated(task.getTimeCreated());
@@ -59,8 +58,7 @@ public class TaskServiceImpl implements TaskService {
     public void delete(Long id) {
         Optional<Task> task = taskRepository.findById(id);
 
-        if (task.isEmpty())
-            throw new RuntimeException("No task with the id '" + id + "' found.");
+        if (task.isEmpty()) throw new TaskNotFoundException(id);
 
         taskRepository.deleteById(id);
     }
