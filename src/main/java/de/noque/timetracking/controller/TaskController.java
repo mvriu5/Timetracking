@@ -1,8 +1,6 @@
 package de.noque.timetracking.controller;
 
-import de.noque.timetracking.model.Employee;
 import de.noque.timetracking.model.Task;
-import de.noque.timetracking.service.EmployeeService;
 import de.noque.timetracking.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,13 +28,13 @@ public class TaskController {
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
-    @GetMapping("/employee/{employeeId}")
+    @GetMapping("/{employee}/{employeeId}")
     public ResponseEntity<List<Task>> getAllTasksFromEmployee(@PathVariable("employeeId") Long employeeId) {
         List<Task> tasks = taskService.getAllFromEmployee(employeeId);
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping("/create")
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
         Task taskDb = taskService.create(task);
         return new ResponseEntity<>(taskDb, HttpStatus.OK);
@@ -54,7 +52,7 @@ public class TaskController {
         return new ResponseEntity<>("Task with the id '" + id + "' deleted successfully.", HttpStatus.OK);
     }
 
-    @DeleteMapping("/employee/{employeeId}")
+    @DeleteMapping("/{employee}/{employeeId}")
     public ResponseEntity<?> deleteAllTasksFromEmployee(@PathVariable("employeeId") Long employeeId) {
         taskService.deleteAllFromEmployee(employeeId);
         return new ResponseEntity<>("Tasks from employee '" + employeeId + "' deleted successfully.", HttpStatus.OK);

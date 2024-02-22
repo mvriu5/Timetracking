@@ -1,8 +1,11 @@
 package de.noque.timetracking.model;
 
 import jakarta.persistence.*;
+import jdk.jfr.Timespan;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,6 +29,9 @@ public class Task {
     private LocalDateTime TimeTo;
 
     @Column(nullable = false)
+    private int Timespan;
+
+    @Column(nullable = false)
     @CreationTimestamp
     private LocalDateTime TimeCreated;
 
@@ -36,7 +42,7 @@ public class Task {
         this.Task = task;
         this.TimeFrom = timeFrom;
         this.TimeTo = timeTo;
-        this.TimeCreated = LocalDateTime.now();
+        this.Timespan = Duration.between(timeFrom, timeTo).toMinutesPart();
     }
 
     //<editor-fold desc="Getter & Setter">
@@ -78,6 +84,14 @@ public class Task {
 
     public void setTimeTo(LocalDateTime timeTo) {
         TimeTo = timeTo;
+    }
+
+    public int getTimespan() {
+        return Timespan;
+    }
+
+    public void setTimespan(int timespan) {
+        Timespan = timespan;
     }
 
     public LocalDateTime getTimeCreated() {

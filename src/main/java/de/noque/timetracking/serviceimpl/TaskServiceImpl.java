@@ -50,6 +50,7 @@ public class TaskServiceImpl implements TaskService {
         taskDb.get().setTimeCreated(task.getTimeCreated());
         taskDb.get().setTimeFrom(task.getTimeFrom());
         taskDb.get().setTimeTo(task.getTimeTo());
+        taskDb.get().setTimespan(task.getTimespan());
 
         return taskRepository.save(taskDb.get());
     }
