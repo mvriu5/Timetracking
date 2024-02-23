@@ -5,13 +5,21 @@ import de.noque.timetracking.model.Employee;
 import de.noque.timetracking.repository.EmployeeRepository;
 import de.noque.timetracking.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl implements EmployeeService, UserDetailsService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -57,14 +65,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    /*@Override
+    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<Employee> employeeOptional = employeeRepository.findEmployeeByEmail(email);
 
-        Employee employee = employeeRepository.findEmployeeByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not exists by Username or Email"));
+        if (employeeOptional.isEmpty()) throw new UsernameNotFoundException("User not exists by Username or Email");
 
+        Employee employee = employeeOptional.get();
         Set<GrantedAuthority> authorities = Collections.singleton(new SimpleGrantedAuthority(employee.getRole()));
 
         return new User(email, employee.getPassword(), authorities);
-    }*/
+    }
 }

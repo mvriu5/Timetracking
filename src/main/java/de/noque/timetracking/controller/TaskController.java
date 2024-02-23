@@ -28,7 +28,7 @@ public class TaskController {
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
-    @GetMapping("/{employee}/{employeeId}")
+    @GetMapping("/employee/{employeeId}")
     public ResponseEntity<List<Task>> getAllTasksFromEmployee(@PathVariable("employeeId") Long employeeId) {
         List<Task> tasks = taskService.getAllFromEmployee(employeeId);
         return new ResponseEntity<>(tasks, HttpStatus.OK);
@@ -52,7 +52,7 @@ public class TaskController {
         return new ResponseEntity<>("Task with the id '" + id + "' deleted successfully.", HttpStatus.OK);
     }
 
-    @DeleteMapping("/{employee}/{employeeId}")
+    @DeleteMapping("/employee/{employeeId}")
     public ResponseEntity<?> deleteAllTasksFromEmployee(@PathVariable("employeeId") Long employeeId) {
         taskService.deleteAllFromEmployee(employeeId);
         return new ResponseEntity<>("Tasks from employee '" + employeeId + "' deleted successfully.", HttpStatus.OK);
