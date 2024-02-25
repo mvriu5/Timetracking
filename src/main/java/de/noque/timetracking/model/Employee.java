@@ -1,6 +1,7 @@
 package de.noque.timetracking.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
